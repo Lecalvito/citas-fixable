@@ -1,0 +1,22 @@
+.cita-frase {
+  font-size: 1.2rem;
+  color: #3366cc;
+  font-weight: 500;
+}
+
+.cita-autor {
+  text-align: right;
+  font-weight: bold;
+  margin-top: 10px;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+ion-title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+:host {
+  padding-top: env(safe-area-inset-top);
+}
