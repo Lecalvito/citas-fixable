@@ -1,3 +1,8 @@
+:host {
+  padding-top: env(safe-area-inset-top); /* Respeta la barra de estado */
+  display: block;
+}
+
 .cita-frase {
   font-size: 1.2rem;
   color: #3366cc;
@@ -15,8 +20,4 @@
 ion-title {
   font-size: 20px;
   font-weight: 600;
-}
-
-:host {
-  padding-top: env(safe-area-inset-top);
 }

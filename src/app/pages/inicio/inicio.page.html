@@ -9,10 +9,13 @@
   </ion-toolbar>
 </ion-header>
 
+<!-- OJO: fullscreen="false" es fundamental -->
 <ion-content fullscreen="false" class="ion-padding">
   <ion-card *ngIf="citaAleatoria" class="cita-card">
     <ion-card-content>
-      <h2 class="cita-frase ion-text-wrap">“{{ citaAleatoria.frase }}”</h2>
+      <h2 class="cita-frase ion-text-wrap">
+        “{{ citaAleatoria.frase }}”
+      </h2>
       <p class="cita-autor">— {{ citaAleatoria.autor }}</p>
 
       <ion-button
@@ -21,7 +24,7 @@
         color="danger"
         class="ion-margin-top"
         (click)="eliminarCita()">
-        ELIMINAR CITA
+        Eliminar cita
       </ion-button>
     </ion-card-content>
   </ion-card>
