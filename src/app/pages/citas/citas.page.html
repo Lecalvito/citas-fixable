@@ -1,41 +1,31 @@
-<ion-header>
+<ion-header translucent="true">
   <ion-toolbar>
-    <ion-title>Gestión de citas</ion-title>
+    <ion-title>Gestión de Citas</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content fullscreen="false" class="ion-padding">
-  <ion-card>
-    <ion-card-content>
-      <ion-item>
-        <ion-label position="floating">Frase</ion-label>
-        <ion-input type="text" required [(ngModel)]="nuevaCita.frase" name="frase" #fraseInput="ngModel" minlength="5">
-        </ion-input>
-      </ion-item>
-      <ion-text color="danger" *ngIf="fraseInput.invalid && fraseInput.touched">
-        <p *ngIf="fraseInput.errors?.['required']">La frase es obligatoria</p>
-        <p *ngIf="fraseInput.errors?.['minlength']">Debe tener al menos 5 caracteres</p>
-      </ion-text>
-      <ion-item>
-        <ion-label position="floating">Autor</ion-label>
-        <ion-input type="text" required [(ngModel)]="nuevaCita.autor" name="autor" #autorInput="ngModel" minlength="2">
-        </ion-input>
-      </ion-item>
-      <ion-text color="danger" *ngIf="autorInput.invalid && autorInput.touched">
-        <p *ngIf="autorInput.errors?.['required']">El autor es obligatorio</p>
-        <p *ngIf="autorInput.errors?.['minlength']">Debe tener al menos 2 caracteres</p>
-      </ion-text>
-      <ion-button expand="block" (click)="agregarCita()" [disabled]="fraseInput.invalid || autorInput.invalid">AGREGAR</ion-button>
-    </ion-card-content>
-  </ion-card>
+  <ion-item>
+    <ion-label position="floating">Frase</ion-label>
+    <ion-input [(ngModel)]="frase" required minlength="5"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Autor</ion-label>
+    <ion-input [(ngModel)]="autor" required minlength="2"></ion-input>
+  </ion-item>
+
+  <ion-button expand="block" class="ion-margin-top" (click)="agregarCita()">
+    Agregar Cita
+  </ion-button>
 
   <ion-list>
     <ion-item *ngFor="let cita of citas">
       <ion-label>
-        <p>“{{ cita.frase }}”</p>
-        <small>{{ cita.autor }}</small>
+        <h2>{{ cita.frase }}</h2>
+        <p>{{ cita.autor }}</p>
       </ion-label>
-      <ion-button fill="clear" color="danger" slot="end" (click)="eliminarCita(cita.frase)">
+      <ion-button slot="end" color="danger" (click)="eliminarCita(cita)">
         Eliminar
       </ion-button>
     </ion-item>

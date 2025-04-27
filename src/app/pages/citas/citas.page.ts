@@ -1,43 +1,42 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
-import { CitaService, Cita } from '../../services/cita.service';
+import { SQLiteService } from '../../services/sqlite.service';
 
 @Component({
   selector: 'app-citas',
   standalone: true,
-  imports: [CommonModule, IonicModule, FormsModule],
   templateUrl: './citas.page.html',
   styleUrls: ['./citas.page.scss'],
+  imports: [CommonModule, IonicModule, FormsModule],
 })
-export class CitasPage {
-  nuevaCita: Cita = {
-    frase: '',
-    autor: ''
-  };
+export class CitasPage implements OnInit {
+  frase = '';
+  autor = '';
+  citas: { frase: string; autor: string }[] = [];
 
-  citas: Cita[] = [];
-  constructor(private citaService: CitaService) {}
+  constructor(private sqliteService: SQLiteService) {}
 
-  ionViewWillEnter() {
-    this.cargarCitas();
+  async ngOnInit() {
+    await this.cargarCitas();
   }
 
-  cargarCitas() {
-    this.citas = this.citaService.obtenerTodas();
+  async cargarCitas() {
+    this.citas = await this.sqliteService.obtenerCitas();
   }
 
-  agregarCita() {
-    if (this.nuevaCita.frase.trim() && this.nuevaCita.autor.trim()) {
-      this.citaService.agregarCita(this.nuevaCita.frase, this.nuevaCita.autor);
-      this.nuevaCita = { frase: '', autor: '' };
-      this.cargarCitas();
+  async agregarCita() {
+    if (this.frase.trim().length >= 5 && this.autor.trim().length >= 2) {
+      await this.sqliteService.insertarCita(this.frase.trim(), this.autor.trim());
+      this.frase = '';
+      this.autor = '';
+      await this.cargarCitas();
     }
   }
 
-  eliminarCita(frase: string) {
-    this.citaService.eliminarCita(frase);
-    this.cargarCitas();
+  async eliminarCita(cita: { frase: string; autor: string }) {
+    await this.sqliteService.eliminarCita(cita.frase);
+    await this.cargarCitas();
   }
 }

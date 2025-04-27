@@ -5,10 +5,9 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app/app.routes';
 import { IonicModule } from '@ionic/angular';
 
-// 🔥 AQUÍ FORZAMOS MATERIAL DESIGN (md) PARA TODO
 bootstrapApplication(AppComponent, {
   providers: [
-    importProvidersFrom(IonicModule.forRoot({ mode: 'md' })), // 👈🏻 ESTA LÍNEA
+    importProvidersFrom(IonicModule.forRoot({ mode: 'md' })),
     provideRouter(routes),
   ],
 }).catch(err => console.error(err));
