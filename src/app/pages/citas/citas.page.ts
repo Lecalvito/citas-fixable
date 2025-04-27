@@ -18,6 +18,10 @@ export class CitasPage implements OnInit {
 
   constructor(private sqliteService: SQLiteService) {}
 
+  formularioValido(): boolean {
+    return this.frase.trim().length >= 5 && this.autor.trim().length >= 2;
+  }
+  
   async ngOnInit() {
     await this.cargarCitas();
   }
